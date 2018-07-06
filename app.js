@@ -1,5 +1,6 @@
 const SteamUser = require('steam-user')
 const client = new SteamUser()
+const logger = require('./logger')
 const Config = require('./config.json');
 
 client.logOn({
@@ -9,12 +10,12 @@ client.logOn({
 })
 
 client.on('loggedOn', function(details) {
-	console.log("Logged into Steam as " + client.steamID.getSteam3RenderedID())
+  logger.log({level: 'success', message: "Logged into Steam as " + Config.username})
 	client.setPersona(SteamUser.EPersonaState.Online)
 })
 
 client.on('steamGuard', function(domain, callback) {
-	console.log("Steam Guard code needed from email ending in " + domain)
+  logger.log({level: 'warn', message: "Steam Guard code needed from email ending in " + domain})
 	let code = getCodeSomehow()
 	callback(code)
 })
@@ -28,13 +29,12 @@ client.on('error', function(e) {
 // 	console.log("Friend message from " + steamID.getSteam3RenderedID() + ": " + message)
 // });
 
-
 client.on("friendRelationship", function(steamID, relationship) {
   if (relationship == SteamUser.EFriendRelationship.RequestRecipient) {
     process.stderr.write("\007")
     client.addFriend(steamID)
-    console.log("Friend request accepted")
+    logger.log({level: 'success', message: "Friend request accepted"})
     client.chatMessage(steamID, Config.message)
-    console.log("Welcome message sent")
+    logger.log({level: 'info', message: "Welcome message sent"})
   }
 })
