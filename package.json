@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "dodgem": "^0.2.12",
+    "steam": "^1.4.0",
+    "steam-user": "^3.27.1"
+  },
+  "name": "friendem",
+  "version": "1.0.0",
+  "description": "Auto accepting and replying to new friend requests on steam",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "steam",
+    "friends",
+    "friend",
+    "request",
+    "bot"
+  ],
+  "author": "Kalle Kihlström",
+  "license": "ISC"
+}
