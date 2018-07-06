@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "dodgem": "^0.2.12",
     "steam": "^1.4.0",
     "steam-user": "^3.27.1"
   },
