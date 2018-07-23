@@ -50,6 +50,6 @@ client.on('friendRelationship', function(steamID, relationship) {
     client.addFriend(steamID)
     logger.log({level: 'success', message: 'Friend request accepted #' + count})
     client.chatMessage(steamID, Config.message)
-    logger.log({level: 'info', message: 'Welcome message sent'})
+    logger.log({level: 'debug', message: 'Welcome message sent'})
   }
 })
