@@ -1,6 +1,9 @@
 {
   "username": "",
   "password": "",
-  "machine": "NameHere",
-  "message": "Hello!"
+  "machine": "",
+  "online": true,
+  "msg": "Hello!",
+  "afk_msg": "Sorry, I'm afk.",
+  "custom_msg": ""
 }

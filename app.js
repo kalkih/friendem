@@ -2,7 +2,9 @@ const SteamUser = require('steam-user')
 const fs = require('fs')
 const client = new SteamUser()
 const logger = require('./logger')
-const Config = require('./config.json');
+const SelfReloadJSON = require('self-reload-json');
+//let Config = require('./config.json');
+let Config = new SelfReloadJSON(__dirname + '/config.json');
 
 let count = 0
 
@@ -49,7 +51,13 @@ client.on('friendRelationship', function(steamID, relationship) {
     process.stderr.write('\007')
     client.addFriend(steamID)
     logger.log({level: 'success', message: 'Friend request accepted #' + count})
-    client.chatMessage(steamID, Config.message)
-    logger.log({level: 'debug', message: 'Welcome message sent'})
+    if (Config.online == 'custom') {
+      client.chatMessage(steamID, Config.custom_msg)
+    } else if (Config.online) {
+      client.chatMessage(steamID, Config.msg)
+    } else {
+      client.chatMessage(steamID, Config.afk_msg)
+    }
+    logger.log({level: 'debug', message: 'Message sent'})
   }
 })

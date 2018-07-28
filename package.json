@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "self-reload-json": "^0.4.0",
     "steam": "^1.4.0",
     "steam-user": "^3.27.1",
     "winston": "^3.0.0"
