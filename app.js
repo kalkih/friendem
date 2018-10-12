@@ -6,6 +6,8 @@ const SelfReloadJSON = require('self-reload-json');
 //let Config = require('./config.json');
 let Config = new SelfReloadJSON(__dirname + '/config.json');
 
+Config.on('error', function(err) {})
+
 let count = 0
 
 client.setOption('dataDirectory', './sentry/')
@@ -37,13 +39,8 @@ client.on('steamGuard', function(domain, callback) {
 })
 
 client.on('error', function(e) {
-	console.log(e)
+	logger.log({level: 'error', message: 'An error occured: ' + e.message})
 })
-
-// client.on('friendMessage', function(steamID, message) {
-//   process.stderr.write('\007');
-// 	console.log('Friend message from ' + steamID.getSteam3RenderedID() + ': ' + message)
-// });
 
 client.on('friendRelationship', function(steamID, relationship) {
   if (relationship == SteamUser.EFriendRelationship.RequestRecipient) {
@@ -58,6 +55,5 @@ client.on('friendRelationship', function(steamID, relationship) {
     } else {
       client.chatMessage(steamID, Config.afk_msg)
     }
-    logger.log({level: 'debug', message: 'Message sent'})
   }
 })
