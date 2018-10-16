@@ -7,6 +7,9 @@ const SelfReloadJSON = require('self-reload-json');
 let Config = new SelfReloadJSON(__dirname + '/config.json');
 
 Config.on('error', function(err) {})
+Config.on('updated', function(err) {
+  logger.log({level: 'info', message: 'Reloaded config'})
+})
 
 let count = 0
 
@@ -24,7 +27,8 @@ if (fs.existsSync('./sentry/sentry.bin')) {
 client.logOn({
   accountName: Config.username,
   password: Config.password,
-  machineName: Config.machine
+  machineName: Config.machine,
+  twoFactorCode: Config.auth || ''
 })
 
 client.on('loggedOn', function(details) {
