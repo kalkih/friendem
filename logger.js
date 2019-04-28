@@ -35,6 +35,6 @@ const logger = winston.createLogger({
   ),
   transports: [new winston.transports.Console()]
 })
-winston.addColors(levels.colors);
+winston.addColors(levels.colors)
 
 module.exports = logger

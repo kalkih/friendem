@@ -3,11 +3,10 @@ const fs = require('fs')
 const client = new SteamUser()
 const logger = require('./logger')
 const SelfReloadJSON = require('self-reload-json');
-//let Config = require('./config.json');
-let Config = new SelfReloadJSON(__dirname + '/config.json');
+let config = new SelfReloadJSON(__dirname + '/config.json');
 
-Config.on('error', function(err) {})
-Config.on('updated', function(err) {
+config.on('error', function(e) {})
+config.on('updated', function(e) {
   logger.log({level: 'info', message: 'Reloaded config'})
 })
 
@@ -25,14 +24,14 @@ if (fs.existsSync('./sentry/sentry.bin')) {
 }
 
 client.logOn({
-  accountName: Config.username,
-  password: Config.password,
-  machineName: Config.machine,
-  twoFactorCode: Config.auth || ''
+  accountName: config.username,
+  password: config.password,
+  machineName: config.machine,
+  twoFactorCode: config.auth || ''
 })
 
 client.on('loggedOn', function(details) {
-  logger.log({level: 'success', message: 'Logged into Steam as ' + Config.username})
+  logger.log({level: 'success', message: 'Logged into Steam as ' + config.username})
 	client.setPersona(SteamUser.EPersonaState.Online)
 })
 
@@ -52,12 +51,12 @@ client.on('friendRelationship', function(steamID, relationship) {
     process.stderr.write('\007')
     client.addFriend(steamID)
     logger.log({level: 'success', message: 'Friend request accepted #' + count})
-    if (Config.online == 'custom') {
-      client.chatMessage(steamID, Config.custom_msg)
-    } else if (Config.online) {
-      client.chatMessage(steamID, Config.msg)
+    if (config.online == 'custom') {
+      client.chatMessage(steamID, config.custom_msg)
+    } else if (config.online) {
+      client.chatMessage(steamID, config.msg)
     } else {
-      client.chatMessage(steamID, Config.afk_msg)
+      client.chatMessage(steamID, config.afk_msg)
     }
   }
 })

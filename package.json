@@ -1,19 +1,10 @@
 {
-  "dependencies": {
-    "self-reload-json": "^0.4.0",
-    "steam": "^1.4.0",
-    "steam-user": "^3.27.1",
-    "winston": "^3.0.0"
-  },
   "name": "friendem",
   "version": "1.0.0",
-  "description": "Auto accepting and replying to new friend requests on steam",
+  "description": "Automatically accept incoming Steam friend requests",
   "main": "app.js",
-  "devDependencies": {},
-  "scripts": {
-    "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "author": "Karl Kihlström",
+  "license": "MIT",
   "keywords": [
     "steam",
     "friends",
@@ -21,6 +12,14 @@
     "request",
     "bot"
   ],
-  "author": "Kalle Kihlström",
-  "license": "ISC"
+  "devDependencies": {},
+  "dependencies": {
+    "self-reload-json": "^0.4.0",
+    "steam": "^1.4.0",
+    "steam-user": "^3.27.1",
+    "winston": "^3.0.0"
+  },
+  "scripts": {
+    "start": "node app.js"
+  }
 }
